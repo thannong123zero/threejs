@@ -5,6 +5,7 @@ import {
   AfterViewInit,
   OnDestroy,
 } from '@angular/core';
+import { sum } from 'lodash-es';
 import * as THREE from 'three';
 
 @Component({
@@ -91,15 +92,19 @@ export class ThreeSolarSystemV2Component implements AfterViewInit, OnDestroy {
 
     // Sun
     const radius = 1;
-    const widthSegments = 6;
-    const heightSegments = 6;
+    const widthSegments = 50;
+    const heightSegments = 50;
     const sphereGeometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
 
-    const sunMaterial = new THREE.MeshPhongMaterial({ emissive: 0xFFFF00 });
+
+    
+
+    const sunMaterial = new THREE.MeshPhongMaterial({ emissive: 0xFFFF00, flatShading: true });
     const sunMesh = new THREE.Mesh(sphereGeometry, sunMaterial);
     sunMesh.scale.set(5, 5, 5);
     solarSystem.add(sunMesh);
     this.objects.push(sunMesh);
+
 
     const earthMaterial = new THREE.MeshPhongMaterial({ color: 0x2233FF, emissive: 0x112244 });
     const earthMesh = new THREE.Mesh(sphereGeometry, earthMaterial);
@@ -118,12 +123,12 @@ export class ThreeSolarSystemV2Component implements AfterViewInit, OnDestroy {
     this.objects.push(moonMesh);
 
     // add an AxesHelper to each node
-    this.objects.forEach((node) => {
-      const axes = new THREE.AxesHelper();
-      axes.material.depthTest = false;
-      axes.renderOrder = 1;
-      node.add(axes);
-    });
+    // this.objects.forEach((node) => {
+    //   const axes = new THREE.AxesHelper();
+    //   axes.material.depthTest = false;
+    //   axes.renderOrder = 1;
+    //   node.add(axes);
+    // });
 
     // Handle window resize
     this.onWindowResize = this.onWindowResize.bind(this);
@@ -134,7 +139,7 @@ export class ThreeSolarSystemV2Component implements AfterViewInit, OnDestroy {
     this.animationId = requestAnimationFrame(this.animate);
 
     if (time) {
-      time *= 0.001; // Convert to seconds
+      time *= 0.0001; // Convert to seconds
     }
 
     // Check if renderer needs resize

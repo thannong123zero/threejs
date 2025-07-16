@@ -58,10 +58,10 @@ export class ThreeSceneComponent implements AfterViewInit, OnDestroy {
     this.scene.add(this.cube);
 
 
-const wireMaterial = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
-    });
+  const wireMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffffff,
+        wireframe: true,
+      });
     const wireframeCube = new THREE.Mesh(geometry, wireMaterial);
     // wireframeCube.position.copy(this.cube.position);
     // wireframeCube.scale.copy(this.cube.scale);
