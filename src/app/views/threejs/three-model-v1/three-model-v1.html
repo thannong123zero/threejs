@@ -1,0 +1,9 @@
+    <div class="three-container">
+      <h2>Three.js Demo</h2>
+      <canvas #threeCanvas class="three-canvas"></canvas>
+      <div class="controls">
+        <button (click)="toggleAnimation()">{{ isAnimating ? 'Pause' : 'Play' }} Animation</button>
+        <button (click)="changeColor()">Change Color</button>
+        <button (click)="resetCamera()">Reset View</button>
+      </div>
+    </div>

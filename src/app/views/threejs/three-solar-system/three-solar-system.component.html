@@ -1,0 +1,26 @@
+<div class="solar-system-container">
+  <canvas #threeCanvas></canvas>
+  <div class="controls">
+    <div class="control-panel">
+      <h5>Sun-Earth-Moon System</h5>
+      <div class="control-group">
+        <label>Animation Speed:</label>
+        <input type="range" min="0" max="5" step="0.1" value="1" #speedSlider (input)="updateSpeed(speedSlider.value)">
+        <span>{{animationSpeed}}x</span>
+      </div>
+      <div class="control-group">
+        <button (click)="toggleAnimation()" class="btn btn-primary">
+          {{isAnimating ? 'Pause' : 'Play'}}
+        </button>
+        <button (click)="resetCamera()" class="btn btn-secondary">Reset View</button>
+      </div>
+      <div class="planet-info" *ngIf="selectedBody">
+        <h6>{{selectedBody.name}}</h6>
+        <p *ngIf="selectedBody.distance > 0">Distance: {{selectedBody.distance}} AU</p>
+        <p *ngIf="selectedBody.period > 0">Orbital Period: {{selectedBody.period}} days</p>
+        <p *ngIf="selectedBody.parent">Orbits: {{selectedBody.parent.name}}</p>
+        <p *ngIf="!selectedBody.parent && selectedBody.distance > 0">Orbits: Sun</p>
+      </div>
+    </div>
+  </div>
+</div>

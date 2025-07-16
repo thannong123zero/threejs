@@ -1,0 +1,75 @@
+<div class="model-viewer-container">
+  <!-- Canvas -->
+  <canvas #modelCanvas class="model-canvas"></canvas>
+  
+  <!-- Controls Panel -->
+  <div class="controls-panel">
+    <h3>3D Model Loader</h3>
+    
+    <!-- File Input -->
+    <div class="control-group">
+      <label for="modelFile">Load Model:</label>
+      <input 
+        id="modelFile"
+        type="file" 
+        accept=".gltf,.glb,.fbx,.obj"
+        (change)="onFileSelected($event)"
+        class="file-input">
+      <p class="file-info">Supported formats: GLTF, FBX, OBJ</p>
+    </div>
+    
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="loading-bar">
+        <div class="loading-progress" [style.width.%]="loadingProgress"></div>
+      </div>
+      <p>Loading... {{ loadingProgress.toFixed(0) }}%</p>
+    </div>
+    
+    <!-- Error Display -->
+    <div *ngIf="error" class="error-message">
+      <p>{{ error }}</p>
+    </div>
+    
+    <!-- Model Info -->
+    <div *ngIf="modelInfo" class="model-info">
+      <h4>Model Information</h4>
+      <p>{{ modelInfo }}</p>
+    </div>
+    
+    <!-- Animation Controls -->
+    <div *ngIf="availableAnimations.length > 0" class="animation-controls">
+      <h4>Animations</h4>
+      <div class="animation-buttons">
+        <button 
+          *ngFor="let animation of availableAnimations"
+          (click)="playAnimation(animation)"
+          [class.active]="currentAnimation === animation"
+          class="animation-button">
+          {{ animation }}
+        </button>
+      </div>
+    </div>
+    
+    <!-- Sample Models -->
+    <div class="sample-models">
+      <h4>Sample Models</h4>
+      <button 
+        (click)="loadSampleModel()" 
+        class="sample-button">
+        Load Robot Sample
+      </button>
+    </div>
+    
+    <!-- Instructions -->
+    <div class="instructions">
+      <h4>Instructions</h4>
+      <ul>
+        <li><strong>Mouse:</strong> Left click + drag to orbit</li>
+        <li><strong>Mouse:</strong> Right click + drag to pan</li>
+        <li><strong>Mouse:</strong> Scroll to zoom</li>
+        <li><strong>Models:</strong> Load your own GLTF, FBX, or OBJ files</li>
+      </ul>
+    </div>
+  </div>
+</div>
